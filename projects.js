@@ -158,184 +158,198 @@ window.addEventListener('load', () => {
 
 // Projects array
 const projects = [
-    {
-        name: 'PROJECT ONE',
-        type: 'WEB DESIGN',
-        pos: 'start',
-        image: 'https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&q=80&w=2370&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' 
-    },
-    {
-        name: 'PROJECT 2',
-        type: 'GRAPHIC DESIGN',
-        pos: 'mid',
-        image: 'https://images.unsplash.com/reserve/aOcWqRTfQ12uwr3wWevA_14401305508_804b300054_o.jpg?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2952&q=80' 
-    },
-    {
-        name: 'PROJECT 3',
-        type: 'TYPE DESIGN',
-        pos: 'end',
-        image: 'https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&fit=crop&q=80&w=2487&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'    },
-    {
-        name: 'PROJECT 4',
-        type: 'WEB DESIGN',
-        pos: 'mid',
-        image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=2564&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' 
-    },
-    {
-        name: 'PROJECT 5',
-        type: 'WEB DESIGN',
-        pos: 'end',
-        image: 'https://images.unsplash.com/photo-1604871000636-074fa5117945?auto=format&fit=crop&q=80&w=2487&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' 
-    },
-    {
-        name: 'PROJECT 6',
-        type: 'GRAPHIC DESIGN',
-        pos: 'mid',
-        image: 'https://images.unsplash.com/photo-1561998338-13ad7883b20f?auto=format&fit=crop&q=80&w=2487&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' 
-    },
-    {
-        name: 'PROJECT 7',
-        type: 'WEB DESIGN',
-        pos: 'start',
-        image: 'https://images.unsplash.com/photo-1454117096348-e4abbeba002c?auto=format&fit=crop&q=80&w=2602&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' 
-    },
-    {
-        name: 'PROJECT 8',
-        type: 'TYPE DESIGN',
-        pos: 'end',
-        image: 'https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?auto=format&fit=crop&q=80&w=2574&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' 
-    },
-];
-
-// ... [rest of your code remains the same until createProjects function] ...
+  {
+    name: "PROJECT ONE",
+    type: "WEB DESIGN",
+    pos: "start",
+    image:
+      "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&q=80&w=2370&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    name: "PROJECT 2",
+    type: "GRAPHIC DESIGN",
+    pos: "mid",
+    video:
+      "/",
+  },
+  {
+    name: "PROJECT 3",
+    type: "TYPE DESIGN",
+    pos: "end",
+    image:
+      "https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&fit=crop&q=80&w=2487&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    name: "PROJECT 4",
+    type: "WEB DESIGN",
+    pos: "mid",
+    video: "https://assets.mixkit.co/videos/preview/mixkit-waves-in-the-water-1164-large.mp4",
+  },
+  {
+    name: "PROJECT 5",
+    type: "WEB DESIGN",
+    pos: "end",
+    image:
+      "https://images.unsplash.com/photo-1604871000636-074fa5117945?auto=format&fit=crop&q=80&w=2487&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    name: "PROJECT 6",
+    type: "GRAPHIC DESIGN",
+    pos: "mid",
+    video: "https://assets.mixkit.co/videos/preview/mixkit-tree-with-yellow-flowers-1173-large.mp4",
+  },
+  {
+    name: "PROJECT 7",
+    type: "WEB DESIGN",
+    pos: "start",
+    image:
+      "https://images.unsplash.com/photo-1454117096348-e4abbeba002c?auto=format&fit=crop&q=80&w=2602&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    name: "PROJECT 8",
+    type: "TYPE DESIGN",
+    pos: "end",
+    video:
+      "https://assets.mixkit.co/videos/preview/mixkit-going-down-a-curved-highway-down-a-mountain-range-1745-large.mp4",
+  },
+]
 
 const createProjects = () => {
-    projects.forEach(project => {
-        let panel = document.createElement('div');
-        panel.classList.add('project', `${project.pos}`);
+  projects.forEach((project) => {
+    const panel = document.createElement("div")
+    panel.classList.add("project", `${project.pos}`)
 
-        let imageContainer = document.createElement('div');
-        imageContainer.className = `image__container`;
+    const imageContainer = document.createElement("div")
+    imageContainer.className = `image__container`
 
-        let image = document.createElement('img');
-        image.classList.add('project__image');
-        image.src = project.image;
+    // Check if project has video or image
+    if (project.video) {
+      const video = document.createElement("video")
+      video.classList.add("project__image", "project__video")
+      video.src = project.video
+      video.autoplay = true
+      video.loop = true
+      video.muted = true
+      video.playsInline = true
+      imageContainer.appendChild(video)
+    } else {
+      const image = document.createElement("img")
+      image.classList.add("project__image")
+      image.src = project.image
+      imageContainer.appendChild(image)
+    }
 
-        let projectDetails = document.createElement('div');
-        projectDetails.classList.add('project__details');
+    const projectDetails = document.createElement("div")
+    projectDetails.classList.add("project__details")
 
-        let projectTitle = document.createElement('p');
-        projectTitle.innerText = project.name;
+    const projectTitle = document.createElement("p")
+    projectTitle.innerText = project.name
 
-        let projectType = document.createElement('p');
-        projectType.innerText = project.type;
+    const projectType = document.createElement("p")
+    projectType.innerText = project.type
 
-        projectDetails.append(projectTitle, projectType);
-        imageContainer.appendChild(image);
-        panel.append(imageContainer, projectDetails);
-
-        document.querySelector('.projects__slider').appendChild(panel);
-    });
-    
-    // REMOVE this line - we'll call it only once
-    // initProjectsAnimation();
-};
+    projectDetails.append(projectTitle, projectType)
+    imageContainer.appendChild(imageContainer.firstChild)
+    panel.append(imageContainer, projectDetails)
+    document.querySelector(".projects__slider").appendChild(panel)
+  })
+}
 
 // Initialize projects GSAP animation
 function initProjectsAnimation() {
-    const projectsSlider = document.querySelector('.projects__slider');
-    const sliderContainer = document.querySelector('.slider__container');
-    
-    if (!projectsSlider || !sliderContainer) return;
-    
-    // Check if animation already exists to prevent duplicates
-    if (projectsSlider._hasAnimation) {
-        console.log('Projects animation already initialized');
-        return;
-    }
-    
-    // Mark as having animation
-    projectsSlider._hasAnimation = true;
-    
-    // Calculate the total width and how much we need to scroll
-    const sliderWidth = projectsSlider.scrollWidth;
-    const containerWidth = sliderContainer.offsetWidth;
-    
-    console.log('Slider width:', sliderWidth, 'Container width:', containerWidth);
-    
-    // Only animate if content is wider than container
-    if (sliderWidth > containerWidth) {
-        const scrollDistance = -(sliderWidth - containerWidth);
-        
-        console.log('Creating animation with scroll distance:', scrollDistance);
-        
-        // Create the horizontal scroll animation
-        gsap.to(projectsSlider, {
-            x: scrollDistance,
-            ease: "none",
-            scrollTrigger: {
-                trigger: "#projects",
-                scroller: "main",
-                start: "top top",
-                end: "bottom bottom",
-                scrub: 1,
-                pin: ".projects__sticky",
-                anticipatePin: 1,
-                markers: true, // Keep this enabled to see what's happening
-                invalidateOnRefresh: true,
-                onUpdate: (self) => {
-                    const progress = self.progress;
-                    console.log('Progress:', progress);
-                }
-            }
-        });
-        
-        // Add parallax or scale effect to project images as they scroll
-        const projectImages = document.querySelectorAll('.project__image');
-        projectImages.forEach((img, index) => {
-            gsap.to(img, {
-                scale: 1.1,
-                filter: "grayscale(0%)",
-                ease: "none",
-                scrollTrigger: {
-                    trigger: img,
-                    scroller: "main",
-                    start: "top 80%",
-                    end: "bottom 20%",
-                    scrub: 1,
-                   
-                    // markers: true,
-                }
-            });
-        });
-    } else {
-        console.log('No animation needed - content fits in container');
-    }
+  const projectsSlider = document.querySelector(".projects__slider")
+  const sliderContainer = document.querySelector(".slider__container")
+
+  if (!projectsSlider || !sliderContainer) return
+
+  // Check if animation already exists to prevent duplicates
+  if (projectsSlider._hasAnimation) {
+    console.log("Projects animation already initialized")
+    return
+  }
+
+  // Mark as having animation
+  projectsSlider._hasAnimation = true
+
+  // Calculate the total width and how much we need to scroll
+  const sliderWidth = projectsSlider.scrollWidth
+  const containerWidth = sliderContainer.offsetWidth
+
+  console.log("Slider width:", sliderWidth, "Container width:", containerWidth)
+
+  // Only animate if content is wider than container
+  if (sliderWidth > containerWidth) {
+    const scrollDistance = -(sliderWidth - containerWidth)
+
+    console.log("Creating animation with scroll distance:", scrollDistance)
+
+    // Create the horizontal scroll animation
+    gsap.to(projectsSlider, {
+      x: scrollDistance,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#projects",
+        scroller: "main",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 1,
+        pin: ".projects__sticky",
+        anticipatePin: 1,
+        markers: true,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          const progress = self.progress
+          console.log("Progress:", progress)
+        },
+      },
+    })
+
+    const projectImages = document.querySelectorAll(".project__image")
+    projectImages.forEach((media, index) => {
+      gsap.to(media, {
+        scale: 1.1,
+        filter: "grayscale(0%)",
+        ease: "none",
+        scrollTrigger: {
+          trigger: media,
+          scroller: "main",
+          start: "top 80%",
+          end: "bottom 20%",
+          scrub: 1,
+        },
+      })
+    })
+  } else {
+    console.log("No animation needed - content fits in container")
+  }
 }
 
-// Handle initial page load - call initProjectsAnimation only once here
-window.addEventListener('load', () => {
-    // First, create all projects
-    createProjects();
-    
-    // Wait a moment for DOM to update, then initialize animation
-    setTimeout(() => {
-        initProjectsAnimation();
-        ScrollTrigger.refresh();
-    }, 500); // Increased timeout to ensure DOM is ready
-});
+// Handle initial page load
+window.addEventListener("load", () => {
+  createProjects()
 
-// Add CSS to ensure proper layout
-const style = document.createElement('style');
+  setTimeout(() => {
+    initProjectsAnimation()
+    ScrollTrigger.refresh()
+  }, 500)
+})
+
+const style = document.createElement("style")
 style.textContent = `
     .projects__slider {
-        gap: 20px; /* Add gap between projects */
+        gap: 20px;
+    }
+
+    .project {
+        flex: 0 0 auto;
+        width: 25vw;
+        min-width: 300px;
     }
     
-    .project {
-        flex: 0 0 auto; /* Prevent flex items from shrinking */
-        width: 25vw;
-        min-width: 300px; /* Minimum width for projects */
+    .project__video {
+        display: block;
+        width: 100%;
+        height: 100%;
     }
-`;
-document.head.appendChild(style);
+`
+document.head.appendChild(style)
