@@ -114,7 +114,7 @@ const projects = [
         name: 'PROJECT ONE',
         type: 'WEB DESIGN',
         pos: 'start',
-         image: './images/1.jpg' 
+         image: './images/corporate.gif' 
     },
     {
         name: 'PROJECT 2',
@@ -145,7 +145,7 @@ const projects = [
         name: 'PROJECT 6',
         type: 'GRAPHIC DESIGN',
         pos: 'mid',
-         image: './images/7.jpg' 
+         image: './images/flower-blooming.gif' 
     },
     {
         name: 'PROJECT 7',
