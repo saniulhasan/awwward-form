@@ -218,3 +218,79 @@ overflow: hidden;
 display: inline-block;
 transform: translateY(110%);
 }
+
+
+#projects{
+    position: relative;
+    height: 200%;
+}
+
+.projects__sticky{
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 50%;
+}
+
+.slider__container{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.projects__slider{
+    height: 100%;
+    display: flex;
+    width: min-content;
+    overflow: hidden;
+    will-change: transform;
+}
+
+.project{
+    position: relative;
+    width: 25vw;
+    height: 100%;
+    padding: 80px 20px 60px;
+    display: flex;
+    flex-direction: column;
+}
+
+.image__container{
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+}
+
+.project__image{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: grayscale(50%);
+}
+
+.start{
+    justify-content: flex-start;
+
+}
+
+.mid{
+    justify-content: center;
+}
+.end{
+    justify-content: end;
+}
+
+.project__details{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 1rem;
+}
+
+.project__details p{
+    font-size: .8rem ;
+}

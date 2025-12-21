@@ -25,11 +25,53 @@ function animateVideo() {
     headerRight.style.transform = `translateX(${textTrans}px)`;
 }
 
+// Projects animation function
+function animateProjects() {
+    const projectsSection = document.querySelector('#projects');
+    const projectsSticky = document.querySelector('.projects__sticky');
+    const projectsSlider = document.querySelector('.projects__slider');
+    
+    if (!projectsSection || !projectsSticky || !projectsSlider) return;
+    
+    // Get the position of the projects section relative to viewport
+    const rect = projectsSection.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+    
+    // Calculate progress (0 to 1) as projects section scrolls
+    const sectionTop = rect.top;
+    const sectionHeight = rect.height;
+    
+    // Calculate scroll progress through the projects section
+    let progress = 0;
+    
+    // When section enters from bottom
+    if (sectionTop < viewportHeight && sectionTop > -sectionHeight) {
+        progress = 1 - (sectionTop / (viewportHeight - sectionHeight));
+        progress = Math.max(0, Math.min(1, progress)); // Clamp between 0 and 1
+    } else if (sectionTop <= -sectionHeight) {
+        progress = 1; // Section completely scrolled past
+    }
+    
+    // Calculate translateX based on progress
+    const sliderWidth = projectsSlider.scrollWidth;
+    const containerWidth = document.querySelector('.slider__container').offsetWidth;
+    const maxTranslate = -(sliderWidth - containerWidth);
+    
+    // Apply the animation with easing
+    const translateX = maxTranslate * progress;
+    projectsSlider.style.transform = `translateX(${translateX}px)`;
+    projectsSlider.style.transition = 'transform 0.1s linear';
+}
+
 // Add scroll event listener
-mainElement.addEventListener('scroll', animateVideo);
+mainElement.addEventListener('scroll', () => {
+    animateVideo();
+    animateProjects();
+});
 
 // Initial call to set initial state
 animateVideo();
+animateProjects();
 
 // GSAP Scroll Animations
 gsap.registerPlugin(ScrollTrigger);
@@ -108,6 +150,12 @@ function resetHeroText() {
   });
 }
 
+// Handle initial page load
+window.addEventListener('load', () => {
+  ScrollTrigger.refresh();
+  animateProjects(); // Initialize projects position
+});
+
 // Projects array
 const projects = [
     {
@@ -159,134 +207,34 @@ const projects = [
     },
 ];
 
-// ... [rest of your code remains the same until createProjects function] ...
-
-const createProjects = () => {
-    projects.forEach(project => {
-        let panel = document.createElement('div');
-        panel.classList.add('project', `${project.pos}`);
-
-        let imageContainer = document.createElement('div');
-        imageContainer.className = `image__container`;
-
-        let image = document.createElement('img');
-        image.classList.add('project__image');
-        image.src = project.image;
-
-        let projectDetails = document.createElement('div');
-        projectDetails.classList.add('project__details');
-
-        let projectTitle = document.createElement('p');
-        projectTitle.innerText = project.name;
-
-        let projectType = document.createElement('p');
-        projectType.innerText = project.type;
-
-        projectDetails.append(projectTitle, projectType);
-        imageContainer.appendChild(image);
-        panel.append(imageContainer, projectDetails);
-
-        document.querySelector('.projects__slider').appendChild(panel);
-    });
-    
-    // REMOVE this line - we'll call it only once
-    // initProjectsAnimation();
-};
-
-// Initialize projects GSAP animation
-function initProjectsAnimation() {
+// GSAP Projects Animation
+function setupProjectsAnimation() {
+    const projectsSection = document.querySelector('#projects');
     const projectsSlider = document.querySelector('.projects__slider');
-    const sliderContainer = document.querySelector('.slider__container');
     
-    if (!projectsSlider || !sliderContainer) return;
+    if (!projectsSection || !projectsSlider) return;
     
-    // Check if animation already exists to prevent duplicates
-    if (projectsSlider._hasAnimation) {
-        console.log('Projects animation already initialized');
-        return;
-    }
-    
-    // Mark as having animation
-    projectsSlider._hasAnimation = true;
-    
-    // Calculate the total width and how much we need to scroll
     const sliderWidth = projectsSlider.scrollWidth;
-    const containerWidth = sliderContainer.offsetWidth;
+    const containerWidth = document.querySelector('.slider__container').offsetWidth;
+    const maxTranslate = -(sliderWidth - containerWidth);
     
-    console.log('Slider width:', sliderWidth, 'Container width:', containerWidth);
-    
-    // Only animate if content is wider than container
-    if (sliderWidth > containerWidth) {
-        const scrollDistance = -(sliderWidth - containerWidth);
-        
-        console.log('Creating animation with scroll distance:', scrollDistance);
-        
-        // Create the horizontal scroll animation
-        gsap.to(projectsSlider, {
-            x: scrollDistance,
-            ease: "none",
-            scrollTrigger: {
-                trigger: "#projects",
-                scroller: "main",
-                start: "top top",
-                end: "bottom bottom",
-                scrub: 1,
-                pin: ".projects__sticky",
-                anticipatePin: 1,
-                markers: true, // Keep this enabled to see what's happening
-                invalidateOnRefresh: true,
-                onUpdate: (self) => {
-                    const progress = self.progress;
-                    console.log('Progress:', progress);
-                }
-            }
-        });
-        
-        // Add parallax or scale effect to project images as they scroll
-        const projectImages = document.querySelectorAll('.project__image');
-        projectImages.forEach((img, index) => {
-            gsap.to(img, {
-                scale: 1.1,
-                filter: "grayscale(0%)",
-                ease: "none",
-                scrollTrigger: {
-                    trigger: img,
-                    scroller: "main",
-                    start: "center 80%",
-                    end: "center 20%",
-                    scrub: 1,
-                    // markers: true,
-                }
-            });
-        });
-    } else {
-        console.log('No animation needed - content fits in container');
-    }
+    // Create GSAP animation with ScrollTrigger
+    gsap.to(projectsSlider, {
+        x: maxTranslate,
+        ease: "none",
+        scrollTrigger: {
+            trigger: "#projects",
+            scroller: "main",
+            start: "top top",
+            end: "bottom bottom",
+            scrub: true,
+            // markers: true // Uncomment to see trigger points
+        }
+    });
 }
 
-// Handle initial page load - call initProjectsAnimation only once here
+// Call this after creating projects and on window load
 window.addEventListener('load', () => {
-    // First, create all projects
-    createProjects();
-    
-    // Wait a moment for DOM to update, then initialize animation
-    setTimeout(() => {
-        initProjectsAnimation();
-        ScrollTrigger.refresh();
-    }, 500); // Increased timeout to ensure DOM is ready
+    ScrollTrigger.refresh();
+    setupProjectsAnimation();
 });
-
-// Add CSS to ensure proper layout
-const style = document.createElement('style');
-style.textContent = `
-    .projects__slider {
-        gap: 20px; /* Add gap between projects */
-    }
-    
-    .project {
-        flex: 0 0 auto; /* Prevent flex items from shrinking */
-        width: 25vw;
-        min-width: 300px; /* Minimum width for projects */
-    }
-`;
-document.head.appendChild(style);
