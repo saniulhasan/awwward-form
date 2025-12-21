@@ -300,9 +300,10 @@ function initProjectsAnimation() {
                 scrollTrigger: {
                     trigger: img,
                     scroller: "main",
-                    start: "center 80%",
-                    end: "center 20%",
+                    start: "top 80%",
+                    end: "bottom 20%",
                     scrub: 1,
+                   
                     // markers: true,
                 }
             });
