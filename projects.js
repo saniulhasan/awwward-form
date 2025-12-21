@@ -207,34 +207,134 @@ const projects = [
     },
 ];
 
-// GSAP Projects Animation
-function setupProjectsAnimation() {
-    const projectsSection = document.querySelector('#projects');
-    const projectsSlider = document.querySelector('.projects__slider');
-    
-    if (!projectsSection || !projectsSlider) return;
-    
-    const sliderWidth = projectsSlider.scrollWidth;
-    const containerWidth = document.querySelector('.slider__container').offsetWidth;
-    const maxTranslate = -(sliderWidth - containerWidth);
-    
-    // Create GSAP animation with ScrollTrigger
-    gsap.to(projectsSlider, {
-        x: maxTranslate,
-        ease: "none",
-        scrollTrigger: {
-            trigger: "#projects",
-            scroller: "main",
-            start: "top top",
-            end: "bottom bottom",
-            scrub: true,
-            // markers: true // Uncomment to see trigger points
-        }
+// ... [rest of your code remains the same until createProjects function] ...
+
+const createProjects = () => {
+    projects.forEach(project => {
+        let panel = document.createElement('div');
+        panel.classList.add('project', `${project.pos}`);
+
+        let imageContainer = document.createElement('div');
+        imageContainer.className = `image__container`;
+
+        let image = document.createElement('img');
+        image.classList.add('project__image');
+        image.src = project.image;
+
+        let projectDetails = document.createElement('div');
+        projectDetails.classList.add('project__details');
+
+        let projectTitle = document.createElement('p');
+        projectTitle.innerText = project.name;
+
+        let projectType = document.createElement('p');
+        projectType.innerText = project.type;
+
+        projectDetails.append(projectTitle, projectType);
+        imageContainer.appendChild(image);
+        panel.append(imageContainer, projectDetails);
+
+        document.querySelector('.projects__slider').appendChild(panel);
     });
+    
+    // REMOVE this line - we'll call it only once
+    // initProjectsAnimation();
+};
+
+// Initialize projects GSAP animation
+function initProjectsAnimation() {
+    const projectsSlider = document.querySelector('.projects__slider');
+    const sliderContainer = document.querySelector('.slider__container');
+    
+    if (!projectsSlider || !sliderContainer) return;
+    
+    // Check if animation already exists to prevent duplicates
+    if (projectsSlider._hasAnimation) {
+        console.log('Projects animation already initialized');
+        return;
+    }
+    
+    // Mark as having animation
+    projectsSlider._hasAnimation = true;
+    
+    // Calculate the total width and how much we need to scroll
+    const sliderWidth = projectsSlider.scrollWidth;
+    const containerWidth = sliderContainer.offsetWidth;
+    
+    console.log('Slider width:', sliderWidth, 'Container width:', containerWidth);
+    
+    // Only animate if content is wider than container
+    if (sliderWidth > containerWidth) {
+        const scrollDistance = -(sliderWidth - containerWidth);
+        
+        console.log('Creating animation with scroll distance:', scrollDistance);
+        
+        // Create the horizontal scroll animation
+        gsap.to(projectsSlider, {
+            x: scrollDistance,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#projects",
+                scroller: "main",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 1,
+                pin: ".projects__sticky",
+                anticipatePin: 1,
+                markers: true, // Keep this enabled to see what's happening
+                invalidateOnRefresh: true,
+                onUpdate: (self) => {
+                    const progress = self.progress;
+                    console.log('Progress:', progress);
+                }
+            }
+        });
+        
+        // Add parallax or scale effect to project images as they scroll
+        const projectImages = document.querySelectorAll('.project__image');
+        projectImages.forEach((img, index) => {
+            gsap.to(img, {
+                scale: 1.1,
+                filter: "grayscale(0%)",
+                ease: "none",
+                scrollTrigger: {
+                    trigger: img,
+                    scroller: "main",
+                    start: "center 80%",
+                    end: "center 20%",
+                    scrub: 1,
+                    // markers: true,
+                }
+            });
+        });
+    } else {
+        console.log('No animation needed - content fits in container');
+    }
 }
 
-// Call this after creating projects and on window load
+// Handle initial page load - call initProjectsAnimation only once here
 window.addEventListener('load', () => {
-    ScrollTrigger.refresh();
-    setupProjectsAnimation();
+    // First, create all projects
+    createProjects();
+    
+    // Wait a moment for DOM to update, then initialize animation
+    setTimeout(() => {
+        initProjectsAnimation();
+        ScrollTrigger.refresh();
+    }, 500); // Increased timeout to ensure DOM is ready
 });
+
+// Add CSS to ensure proper layout
+const style = document.createElement('style');
+style.textContent = `
+    .projects__slider {
+        gap: 20px; /* Add gap between projects */
+    }
+    
+    .project {
+        flex: 0 0 auto; /* Prevent flex items from shrinking */
+        width: 25vw;
+        min-width: 300px; /* Minimum width for projects */
+    }
+`;
+document.head.appendChild(style);
