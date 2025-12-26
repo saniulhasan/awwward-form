@@ -519,3 +519,49 @@ if (dContainer && leftText && rightText) {
         }
     });
 }
+
+// Simple text reveal animation for all .text__reveal elements
+function initTextRevealAnimations() {
+    const textRevealElements = document.querySelectorAll('.text__reveal');
+    
+    textRevealElements.forEach((element, index) => {
+        // Get parent section
+        const parentSection = element.closest('section');
+        if (!parentSection) return;
+        
+        // Split text
+        const letters = element.textContent.split("");
+        element.innerHTML = letters.map(l => `<span>${l}</span>`).join("");
+        
+        // Set initial state - hide all letters
+        gsap.set(element.querySelectorAll('span'), { y: "110%" });
+        
+        // Animate on scroll (REMOVE once: true to make it repeat)
+        gsap.to(element.querySelectorAll('span'), {
+            y: 0,
+            duration: 0.6,
+            ease: "power4.out",
+            stagger: 0.12,
+            scrollTrigger: {
+                trigger: parentSection,
+                scroller: "main",
+                start: "top 80%", // When top of section is 80% from top of viewport
+                end: "top 20%", // When top of section is 20% from top of viewport
+                toggleActions: "play reverse play reverse", 
+                // play: when scroller enters start position
+                // reverse: when scroller leaves start position (scrolling back up)
+                // play: when scroller enters end position (scrolling down through)
+                // reverse: when scroller leaves end position (scrolling up through)
+                // markers: true // Uncomment to see trigger points
+            }
+        });
+    });
+}
+
+// Initialize on page load
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        initTextRevealAnimations();
+        ScrollTrigger.refresh();
+    }, 100);
+});
